@@ -21,7 +21,15 @@ This addon just provides the basics to run backstopjs and some basic tests, but 
 
 ## Getting started
 
-Install this addon with
+Install this addon
+
+For DDEV v1.23.5 or above run
+
+```shell
+ddev add-on get Metadrop/ddev-backstopjs
+```
+
+For earlier versions of DDEV run
 
 ```shell
 ddev get Metadrop/ddev-backstopjs
