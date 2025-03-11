@@ -5,11 +5,11 @@ services:
     build:
       context: './backstopjsBuild'
       args:
-        BASE_IMAGE: backstopjs/backstopjs:${BACKSTOPJS_VERSION:-6.3.3}
+        BASE_IMAGE: ghcr.io/metadrop/aljibe-tools/backstopjs:${BACKSTOPJS_VERSION:-6.3.7}
         username: $USER
         uid: $DDEV_UID
         gid: $DDEV_GID
-    image: backstopjs/backstopjs:${BACKSTOPJS_VERSION:-6.3.3}-${DDEV_SITENAME}-built
+    image: ghcr.io/metadrop/aljibe-tools/backstopjs:${BACKSTOPJS_VERSION:-6.3.7}-${DDEV_SITENAME}-built
     user:  '$DDEV_UID:$DDEV_GID'
     restart: "no"
     # Add init to reap Chrome processes, as noted at
