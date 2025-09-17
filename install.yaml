@@ -10,5 +10,4 @@ post_install_actions:
  - test -d ../tests/backstopjs || mkdir -p ../tests/backstopjs
  - test -d ../tests/backstopjs/local || mv backstopjsFiles/local ../tests/backstopjs/
  - echo "Install finished. Please restart ddev with 'ddev restart'"
- - echo "After that create your backstop config, e.g. run ddev backstop init."
  - echo "If you need to set a custom backstopjs image or version, you can override variables from docker-compose.backstopjs.yaml in .ddev/.env"
