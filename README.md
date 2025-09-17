@@ -49,11 +49,11 @@ The backstopjs/backstopjs is about 2.6GB, so this may take some time.**
 
 ### Configuration
 
-By default, the backstop tests are expected in $DDEV_APPDIR/tests/backstopjs/<environemnt_folder>. 
+By default, the backstop tests are expected in $DDEV_APPDIR/tests/backstopjs/<environemnt_folder>.
 
 This add-on provide some tests inside "local" environment folder ($DDEV_APPDIR/tests/backstopjs/local). This can be taken as a base to add more tests or provide your own backstop.js or backstop.json configs there.
 
-Hint: have a look at the example from mmunz [backstopjs-config](https://github.com/mmunz/backstopjs-config) 
+Hint: have a look at the example from mmunz [backstopjs-config](https://github.com/mmunz/backstopjs-config)
 
 Alternatively you can create a simple backstop.json config with:
 
@@ -63,7 +63,7 @@ ddev backstop init
 
 ### Run tests
 
-After the config was created it is time to run the tests. 
+After the config was created it is time to run the tests.
 
 Create reference screenshots:
 
@@ -77,7 +77,7 @@ Create test images and compare to reference screenshots:
 ddev backstop <environment> test
 ```
 
-Where <environment> is the environment folder name, or 'local' if not especified.  
+Where <environment> is the environment folder name, or 'local' if not especified.
 
 If your config file is not 'backstop.json' you need to use the --config argument, e.g. --config=backstop.js
 
@@ -94,7 +94,7 @@ ddev backstopjs-report <environment>
 Alternatively open the generated HTML-Report with your browser, e.g.:
 
 ```shell
-open tests/backstopjs/<environment>/backstop_data/_mytestproject_/html_report/index.html 
+open tests/backstopjs/<environment>/backstop_data/_mytestproject_/html_report/index.html
 ```
 
 ### Commands aliases
