@@ -1,17 +1,32 @@
 #!/bin/bash
+
+# Standard DDEV add-on setup code taken from official DDEV add-ons.
 setup() {
   set -eu -o pipefail
-  export DIR="$( cd "$( dirname "$BATS_TEST_FILENAME" )" >/dev/null 2>&1 && pwd )/.."
-  export TESTDIR=~/tmp/test-addon-backstopjs
-  mkdir -p $TESTDIR
-  export PROJNAME=test-addon-backstopjs
-  export DDEV_NON_INTERACTIVE=true
-  ddev delete -Oy ${PROJNAME} >/dev/null 2>&1 || true
+  export GITHUB_REPO=Metadrop/ddev-aljibe
+  TEST_BREW_PREFIX="$(brew --prefix 2>/dev/null || true)"
+  export BATS_LIB_PATH="${BATS_LIB_PATH}:${TEST_BREW_PREFIX}/lib:/usr/lib/bats"
+  bats_load_library bats-assert
+  bats_load_library bats-file
+  bats_load_library bats-support
+
+  # shellcheck disable=SC2155
+  export DIR="$(cd "$(dirname "${BATS_TEST_FILENAME}")/.." >/dev/null 2>&1 && pwd)"
+  # shellcheck disable=SC2155
+  export PROJNAME="test-$(basename "${GITHUB_REPO}")"
+
+  mkdir -p ~/tmp
+  # shellcheck disable=SC2155
+  export TESTDIR=$(mktemp -d ~/tmp/${PROJNAME}.XXXXXX)
+  export DDEV_NONINTERACTIVE=true
+  export DDEV_NO_INSTRUMENTATION=true
+  ddev delete -Oy "${PROJNAME}" >/dev/null 2>&1 || true
+
   cd "${TESTDIR}"
-  ddev config --project-name=${PROJNAME} --project-type=php
-  ddev get metadrop/ddev-aljibe
-  ddev start -y >/dev/null
-  ddev aljibe-assistant --auto
+  run ddev config --project-name="${PROJNAME}" --project-tld=ddev.site
+  assert_success
+  run ddev start -y
+  assert_success
 }
 
 teardown() {
