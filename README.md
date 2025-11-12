@@ -12,12 +12,13 @@
   * [Change backstop tests directory](#change-backstop-tests-directory)
 
 
-## What is DDEV Backstopjs Add-on?
+## What is DDEV BackstopJS Add-on?
 
-This is a ddev-addon for [backstop.js](https://github.com/garris/BackstopJS) based on [mmunz](https://github.com/mmunz/ddev-backstopjs) addon but optimized for Aljibe. Backstopjs is a visual regression testing tool.
-Backstop is executed in a docker container based on the official [backstopjs docker image](https://hub.docker.com/r/backstopjs/backstopjs).
+This is a ddev-addon for [backstop.js](https://github.com/garris/BackstopJS) based on [mmunz](https://github.com/mmunz/ddev-backstopjs) addon but optimized for [DDEV Aljibe](https://github.com/Metadrop/ddev-aljibe). It provides visual regression testing capabilities for DDEV projects using BackstopJS.
 
-This addon just provides the basics to run backstopjs and some basic tests, but those need to be adapted to your needs.
+BackstopJS is executed in a Docker container based on the official [BackstopJS Docker Image](https://hub.docker.com/r/backstopjs/backstopjs).
+
+This addon just provides the basics to run BackstopJS and some basic tests, but those need to be adapted to your needs.
 
 ## Getting started
 
@@ -41,15 +42,16 @@ After that you need to restart the ddev project:
 ddev restart
 ```
 
-**Note: If you haven't downloaded the backstopjs base image before, then it will be downloaded when ddev is restarted.
-The backstopjs/backstopjs is about 2.6GB, so this may take some time.**
+**Note: If you haven't downloaded the backstopjs base image before, then it will be downloaded when DDEV is restarted.
+
+The backstopjs/backstopjs is about 1.6GB, so this may take some time.**
 
 
-## Using backstopjs
+## Using BackstopJS
 
 ### Configuration
 
-By default, the backstop tests are expected in $DDEV_APPDIR/tests/backstopjs/<environemnt_folder>.
+By default, the Backstop tests are expected in $DDEV_APPDIR/tests/backstopjs/<environment_folder>.
 
 This add-on provide some tests inside "local" environment folder ($DDEV_APPDIR/tests/backstopjs/local). This can be taken as a base to add more tests or provide your own backstop.js or backstop.json configs there.
 
@@ -68,16 +70,16 @@ After the config was created it is time to run the tests.
 Create reference screenshots:
 
 ```shell
-ddev backstop <environment> reference
+ddev backstopjs <environment> reference
 ```
 
 Create test images and compare to reference screenshots:
 
 ```shell
-ddev backstop <environment> test
+ddev backstopjs <environment> test
 ```
 
-Where <environment> is the environment folder name, or 'local' if not especified.
+Where <environment> is the environment folder name, or 'local' if not specified.
 
 If your config file is not 'backstop.json' you need to use the --config argument, e.g. --config=backstop.js
 
@@ -97,7 +99,7 @@ Alternatively open the generated HTML-Report with your browser, e.g.:
 open tests/backstopjs/<environment>/backstop_data/_mytestproject_/html_report/index.html
 ```
 
-### Commands aliases
+### Command aliases
 
 Command ```ddev backstopjs``` can be called as:
  - ```ddev backstop```
@@ -109,20 +111,18 @@ Command ```ddev backstopjs-report``` can be called as:
 
 ## Changes to the original docker image
 
-The backstopjs docker image is extended with some functions using a custom docker build, see [Dockerfile](backstopBuild/Dockerfile)
-and uses a custom [entrypoint](backstopBuild/entrypoint.sh).
+The backstopjs docker image is extended with some functions using a custom Docker build, see [Dockerfile](backstopBuild/Dockerfile) and uses a custom [entrypoint](backstopBuild/entrypoint.sh).
 
 In the Dockerfile the following is added/changed:
 
-- add the custom entrypoint.sh to the image
-- delete the default 'node' user with uid 1000 and add current ddev user
-- install the [minimist](https://www.npmjs.com/package/minimist) npm package globally. This is not needed by default
-  but very handy to parse command line args for more complex custom backstopjs configs.
+- Add the custom entrypoint.sh to the image
+- Delete the default 'node' user with uid 1000 and add current ddev user
+- Install the [minimist](https://www.npmjs.com/package/minimist) npm package globally. This is not needed by default but very handy to parse command line args for more complex custom backstopjs configs.
 
 The entrypoint is responsible for:
 
-- add /etc/hosts entries for all hosts configured in the ddev web container automatically
-- add sleep command to keep the container running
+- Add /etc/hosts entries for all hosts configured in the ddev web container automatically
+- Add sleep command to keep the container running
 
 ## Advanced
 
