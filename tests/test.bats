@@ -38,16 +38,16 @@ teardown() {
 
 check_installed () {
   # backstop is installed and can show its version
-  echo "Checking backstopjs version with `ddev backstopjs local version`" >&3
+  echo "Checking backstopjs version with $(ddev backstopjs local version)" >&3
   ddev backstopjs local version | grep 'Command "version" successfully executed' >&3
 }
 
 check_backstopjs () {
   # Create reference bitmaps
-  echo "Creating backstopjs references with `ddev backstopjs local reference`" >&3
+  echo "Creating backstopjs references with $(ddev backstopjs local reference)" >&3
   ddev backstopjs local reference >&3
   # Test should pass because there is a reference bitmaps
-  echo "Testing backstopjs references with `ddev backstopjs local test`" >&3
+  echo "Testing backstopjs references with $(ddev backstopjs local test)" >&3
   ddev backstopjs local test >&3
 }
 
