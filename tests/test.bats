@@ -54,21 +54,13 @@ check_backstopjs () {
 @test "Install latest commit" {
   set -eu -o pipefail
   cd ${TESTDIR}
+
   echo "# ddev get ${DIR} with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
   ddev get ${DIR}
   echo "Installed add-on from directory, restarting ddev" >&3
   ddev restart
   echo "Testing backstopjs" >&3
+
   check_installed
   check_backstopjs
 }
-
-
-#@test "Install latest release version" {
-#  set -eu -o pipefail
-#  cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
-#  echo "Aljibe already have the release version, running tests now"
-#  echo "Testing backstopjs" >&3
-#  check_installed
-#  check_backstopjs
-#}
