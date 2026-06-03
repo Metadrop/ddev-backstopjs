@@ -29,6 +29,9 @@ setup() {
   assert_success
 }
 
+
+
+
 teardown() {
   set -eu -o pipefail
   cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
